@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>待機中</title>
+</head>
+<body style="background:black;color:white;text-align:center;padding-top:100px;">
+
+<h1 id="status">そのままお待ちください</h1>
+
+<video id="video" width="100%" style="display:none;" playsinline>
+  <source src="movie.mp4" type="video/mp4">
+</video>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+ getFirestore,
+ doc,
+ onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+ ここに貼る
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const controlRef = doc(db,"control","main");
+
+onSnapshot(controlRef,(snap)=>{
+
+ const data=snap.data();
+
+ if(data?.play){
+
+   document.getElementById("status").style.display="none";
+
+   const v=document.getElementById("video");
+
+   v.style.display="block";
+
+   v.play();
+
+ }
+
+});
+
+</script>
+
+</body>
+</html>
