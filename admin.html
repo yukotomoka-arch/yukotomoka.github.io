@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>管理画面</title>
+</head>
+<body>
+
+<h1>管理画面</h1>
+
+<button id="playBtn">
+動画再生
+</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+ getFirestore,
+ doc,
+ setDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+ ここに貼る
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+document
+.getElementById("playBtn")
+.onclick=()=>{
+
+ setDoc(
+   doc(db,"control","main"),
+   {play:true}
+ );
+
+};
+
+</script>
+
+</body>
+</html>
